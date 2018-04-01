@@ -30,6 +30,35 @@ class Board
       return false
     else
       return true
+
+   def initialize
+     @cells = Array.new(9, " ")
+
+   end
+
+   def reset!
+     @cells.clear
+     self.cells = Array.new(9, " ")
+   end
+
+   def display
+     puts " #{cells[0]} | #{cells[1]} | #{cells[2]} "
+     puts "-----------"
+     puts " #{cells[3]} | #{cells[4]} | #{cells[5]} "
+     puts "-----------"
+     puts " #{cells[6]} | #{cells[7]} | #{cells[8]} "
+   end
+
+  def position(num)
+    num = num.to_i - 1
+    @cells[num]
+  end
+
+  def full?
+    if cells.all? {|token| token == "X" || token == "O"}
+      true
+    else
+      false
     end
   end
 
@@ -48,6 +77,15 @@ class Board
       return true
     else
       return false
+    amount = cells.select {|token| token == "X" || token == "O"}
+    amount.length
+  end
+
+  def taken?(num)
+    if position(num) == "X" || position(num) == "O"
+      true
+    else
+      false
     end
   end
 
@@ -56,6 +94,9 @@ class Board
       return true
     else
       return false
+      true
+    else
+      false
     end
   end
 
